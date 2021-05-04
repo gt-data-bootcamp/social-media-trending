@@ -24,7 +24,7 @@ Data Transformation (cleaning, joining, filtering, aggregating, etc).
 2. We renamed the columns to ensure uniformity of the datasets
 3. We then merged the data into PostreSQL, in order to support future reporting.
 
-## Analysis
+## Analysis (https://docs.google.com/presentation/d/1STc-LUqwqCwEm3fiB2TaOD-XVJluneNe8IW-HpZf3os/edit#slide=id.p)
 
 Based on the current data set, we have identified these as the top 5 tags used in the most popular videos, based on views.
 

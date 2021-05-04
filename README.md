@@ -27,18 +27,25 @@ Data Transformation (cleaning, joining, filtering, aggregating, etc).
 ## Analysis
 
 Based on the current data set, we have identified these as the top 5 tags used in the most popular videos, based on views.
-"Pop"	1350499920
-"funny"	906181483
-"comedy"	725433295
-"Rap"	536997523
-"Records"	517401466
+
+
+| Tag       | Total Views for all videos |
+|-----------|----------------------------|
+| "Pop"     | 1350499920                 |
+| "funny"   | 906181483                  |
+| "comedy"  | 725433295                  |
+| "Rap"     | 536997523                  |
+| "Records" | 517401466                  |
 
 Based on the current data set, we have identified these as the bottom 5 tags.
-"kentucky"	559
-mondkapje	484
-ikdoenietmeermee	484
-regering	484
-ikdoenietmee	484
+
+| Tag              | Total Views for all videos |
+|------------------|----------------------------|
+| "kentucky"       | 559                        |
+| mondkapje        | 484                        |
+| ikdoenietmeermee | 484                        |
+| regering         | 484                        |
+| ikdoenietmee     | 484                        |
 
 There are many words used to help make videos more "searchable".  Using some popular tags or key words to identify videos, may impact how many view you get.
 We would need more analysis to validate this completely, but we believe it is interesting none the less.
@@ -52,7 +59,7 @@ Setup :
 Example:
 
 ``` sql
-    CREATE ROLE trends_project WITH
+CREATE ROLE trends_project WITH
     LOGIN
     NOSUPERUSER
     INHERIT

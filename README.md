@@ -3,29 +3,88 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-We are going to take look at social media trends to compare common hashtags and keywords.
+In this project we set out to identify social media trends across multiple platforms.  
+We wanted to see if what are the most popular key words (a.k.a tags/hashtags) which are used on videos.
 
-### Project Proposal 
- * Before you start writing any code, remember that you only have one week to complete this project. View this project as a typical assignment from work. Imagine a bunch of data came in and you and your team are tasked with migrating it to a production data base.
+## Extract
 
- * Take advantage of your Instructor and TA support during office hours and class project work time. They are a valuable resource and can help you stay on track.
+For this first version, we choose to use two different data sets for two platforms.
 
+**Trending YouTube Video Statistics** (https://www.kaggle.com/datasnaek/youtube-new?select=USvideos.csv)
+    - This is a CSV format data file.
 
-### Data Cleanup & Analysis 
-Once you have identified your datasets, perform ETL on the data. Make sure to plan and document the following:
+**TikTok Trending Videos Statistics** (https://www.kaggle.com/erikvdven/- tiktok-trending-december-2020?select=trending.json)
+    - This is a JSON format data file.
 
- * The sources of data that you will extract from.
+## Transform & Load
 
- * The type of transformation needed for this data (cleaning, joining, filtering, aggregating, etc).
+Data Transformation (cleaning, joining, filtering, aggregating, etc).
 
- * The type of final production database to load the data into (relational or non-relational).
+1. To start we need to clean up and filter the data sets.   We've filtered out older trend dates, and fields which were unnecessary. 
+2. We renamed the columns to ensure uniformity of the datasets
+3. We then merged the data into PostreSQL, in order to support future reporting.
 
- * The final tables or collections that will be used in the production database.
+## Analysis
 
-You will be required to submit a final technical report with the above information and steps required to reproduce your ETL process.
+Based on the current data set, we have identified these as the top 5 tags used in the most popular videos, based on views.
+"Pop"	1350499920
+"funny"	906181483
+"comedy"	725433295
+"Rap"	536997523
+"Records"	517401466
+
+Based on the current data set, we have identified these as the bottom 5 tags.
+"kentucky"	559
+mondkapje	484
+ikdoenietmeermee	484
+regering	484
+ikdoenietmee	484
+
+There are many words used to help make videos more "searchable".  Using some popular tags or key words to identify videos, may impact how many view you get.
+We would need more analysis to validate this completely, but we believe it is interesting none the less.
+
+## Setup the application
+
+Setup :
+
+1. Clone the repo.
+2. Create a functional user for the database.
+Example:
+
+``` sql
+    CREATE ROLE trends_project WITH
+    LOGIN
+    NOSUPERUSER
+    INHERIT
+    NOCREATEDB
+    NOCREATEROLE
+    NOREPLICATION
+    ENCRYPTED PASSWORD 'XXXXXXX';  -- Choose your own !!....
+```
+
+3. Create a PostreSQL database.
+
+``` sql
+CREATE DATABASE trending_db
+    WITH 
+    OWNER = trends_project
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'English_United States.1252'
+    LC_CTYPE = 'English_United States.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;  -- Tweak if you need
+```
+
+4. Update DB connection parameters in notebook to align to appropriate 
+
+``` python
+# Connect to Database 
+rds_connection_string = "trends_project:XXXXX@localhost:5432/trending_db"
+engine = create_engine(f'postgresql://{rds_connection_string}')
+```
 
 <!-- CONTRIBUTING -->
-## Contributing
+## Contributing Only Section
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
